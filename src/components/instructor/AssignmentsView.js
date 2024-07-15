@@ -116,8 +116,8 @@ const AssignmentsView = (props) => {
     const headers = ['id', 'Title', 'Due Date', '', '', ''];
      
     return(
-        <div> 
-            <h3>{message}</h3>   
+        <div>
+            <h3 id="addMessage">{message}</h3>
 
             { assignments.length > 0 && 
                 <> 
