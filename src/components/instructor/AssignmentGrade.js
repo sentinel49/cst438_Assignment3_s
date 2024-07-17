@@ -76,7 +76,7 @@ const AssignmentGrade = (props) => {
             <Dialog open={open} >
                 <DialogTitle>Grade Assignment</DialogTitle>
                 <DialogContent  style={{paddingTop: 20}} >
-                    <h4>{message}</h4>
+                    <h4 id="gradeMessage">{message}</h4>
                     <table className="Center" > 
                         <thead>
                             <tr>
@@ -89,7 +89,7 @@ const AssignmentGrade = (props) => {
                                     <td>{g.gradeId}</td>
                                     <td>{g.studentName}</td>
                                     <td>{g.studentEmail}</td>
-                                    <td><input type="text"  name="score" value={g.score}  onChange={onChange} /></td>
+                                    <td><input id ="score-input" type="text"  name="score" value={g.score}  onChange={onChange} /></td>
                                     </tr>
                                 ))}
                         </tbody>
@@ -97,7 +97,7 @@ const AssignmentGrade = (props) => {
                 </DialogContent>
                 <DialogActions>
                     <Button color="secondary" onClick={editClose}>Close</Button>
-                    <Button color="primary" onClick={onSave}>Save</Button>
+                    <Button id="upload-scores" color="primary" onClick={onSave}>Save</Button>
                 </DialogActions>
             </Dialog> 
         </>          

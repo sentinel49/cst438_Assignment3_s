@@ -67,7 +67,7 @@ const EnrollmentsView = (props) => {
      
     return(
         <> 
-            <h3>{message}</h3>   
+            <h3 id="submit-success-message">{message}</h3>
             
             { enrollments.length > 0 && 
                 <> 
@@ -86,7 +86,7 @@ const EnrollmentsView = (props) => {
                                 <td>{e.studentId}</td>
                                 <td>{e.name}</td>
                                 <td>{e.email}</td>
-                                <td><input type="text" name="grade" value={(e.grade)?e.grade:''} onChange={onGradeChange} /></td>
+                                <td><input id="grade-input" type="text" name="grade" value={(e.grade)?e.grade:''} onChange={onGradeChange} /></td>
                                 </tr>
                             ))}
                         </tbody>
