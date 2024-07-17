@@ -71,11 +71,11 @@ const CourseEnroll = (props) => {
           });
     }
 
-    const headers = ['section No', 'year', 'semster', 'course Id', 'section', 'title', 'building', 'room', 'times', 'instructor', ''];
+    const headers = ['section No', 'year', 'semester', 'course Id', 'section', 'title', 'building', 'room', 'times', 'instructor', ''];
 
     return(
         <div>
-            <h4>{message}</h4>
+            <h4 id="qaddMessage">{message}</h4>
             <h3>Open Sections Available for Enrollment</h3>
             <table className="Center">
                 <thead>
@@ -88,6 +88,7 @@ const CourseEnroll = (props) => {
                             <tr key={s.secNo}>
                                 <td>{s.secNo}</td>
                                 <td>{s.year}</td>
+                                <td>{s.semester}</td>
                                 <td>{s.courseId}</td>
                                 <td>{s.secId}</td>
                                 <td>{s.title}</td>
@@ -95,7 +96,7 @@ const CourseEnroll = (props) => {
                                 <td>{s.room}</td>
                                 <td>{s.times}</td>
                                 <td>{s.instructorName}</td>
-                                <td><Button onClick={onAdd}>Add Course</Button></td>
+                                <td><Button onClick={onAdd} id="qonAdd">Add Course</Button></td>
                             </tr>
                         ))}
                 </tbody>

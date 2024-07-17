@@ -74,7 +74,7 @@ const ScheduleView = (props) => {
     return(
         <div> 
             <h3>Enter year and semester</h3>
-            <h4>{message}</h4>
+            <h4 id="qdropMessage">{message}</h4>
             <table className="Center">
                 <tbody>
                     <tr>
@@ -88,7 +88,7 @@ const ScheduleView = (props) => {
                 </tbody>
             </table>
             
-            <button type="submit" onClick={fetchEnrollments}>Get Schedule</button>
+            <button type="submit" onClick={fetchEnrollments} id="qgetschedule">Get Schedule</button>
             <br/> 
             <br/>
             <table className="Center">
@@ -107,7 +107,7 @@ const ScheduleView = (props) => {
                         <td>{s.building}</td>
                         <td>{s.room}</td>
                         <td>{s.times}</td>
-                        <td><Button onClick={onDelete}>Drop</Button></td>
+                        <td><Button onClick={onDelete} id="qdrop">Drop</Button></td>
                     </tr>
                  )}
                 </tbody>
