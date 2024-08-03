@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SERVER_URL} from '../../Constants';
+import {SERVER_URL2} from '../../Constants';
 
 const AssignmentsStudentView = (props) => {
      
@@ -12,7 +12,7 @@ const AssignmentsStudentView = (props) => {
     const fetchData = async () => {
         sessionStorage.setItem('term', JSON.stringify(term));
         try {
-            const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=${term.year}&semester=${term.semester}`);
+            const response = await fetch(`${SERVER_URL2}/assignments?studentId=3&year=${term.year}&semester=${term.semester}`);
             if (response.ok) {
                 const data = await response.json();
                 setAssignments(data);
