@@ -4,6 +4,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import Button from '@mui/material/Button';
 import {SERVER_URL} from '../../Constants';
+import {SERVER_URL2} from '../../Constants';
 import AssignmentAdd from './AssignmentAdd';
 import AssignmentUpdate from './AssignmentUpdate';
 import AssignmentGrade from './AssignmentGrade';
@@ -20,7 +21,7 @@ const AssignmentsView = (props) => {
     const fetchAssignments = async () => {
        
       try {
-        const response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`);
+        const response = await fetch(`${SERVER_URL2}/sections/${secNo}/assignments`);
         if (response.ok) {
           const data = await response.json();
           setAssignments(data);
@@ -41,7 +42,7 @@ const AssignmentsView = (props) => {
         assignment.courseId = courseId;
         assignment.secId = secId;
         assignment.secNo = secNo;
-        fetch (`${SERVER_URL}/assignments`, 
+        fetch (`${SERVER_URL2}/assignments`,
         {
           method: 'POST',
           headers: {
@@ -58,7 +59,7 @@ const AssignmentsView = (props) => {
     }
 
     const save = (assignment) => {
-        fetch (`${SERVER_URL}/assignments`, 
+        fetch (`${SERVER_URL2}/assignments`,
         {
           method: 'PUT',
           headers: {
@@ -78,7 +79,7 @@ const AssignmentsView = (props) => {
     const doDelete = (e) => {
         const row_idx = e.target.parentNode.parentNode.rowIndex - 1;
         const id = assignments[row_idx].id;
-        fetch (`${SERVER_URL}/assignments/${id}`, 
+        fetch (`${SERVER_URL2}/assignments/${id}`,
         {
           method: 'DELETE',
           headers: {

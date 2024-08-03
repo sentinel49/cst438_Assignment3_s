@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import {SERVER_URL} from '../../Constants';
+import {SERVER_URL2} from '../../Constants';
+
 
 
 const EnrollmentsView = (props) => {
@@ -16,7 +18,7 @@ const EnrollmentsView = (props) => {
         
         if (!secNo) return;
         try {
-            const response = await fetch(`${SERVER_URL}/sections/${secNo}/enrollments`);
+            const response = await fetch(`${SERVER_URL2}/sections/${secNo}/enrollments`);
             if (response.ok) {
                 const data = await response.json();
                 setEnrollments(data);
@@ -36,7 +38,7 @@ const EnrollmentsView = (props) => {
     const saveGrades = async () => {
         try {
             const response = await fetch (
-                `${SERVER_URL}/enrollments`, 
+                `${SERVER_URL2}/enrollments`,
                 {
                 method: 'PUT',
                 headers: {
