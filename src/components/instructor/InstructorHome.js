@@ -15,15 +15,15 @@ const InstructorHome = () => {
             <tbody>
             <tr>
                 <td>Year:</td>
-                <td><input type="text" id="iyear" name="year" value={term.year} onChange={onChange} /></td>
+                <td><input type="text" id="year" name="year" value={term.year} onChange={onChange} /></td>
             </tr>
             <tr>
                 <td>Semester:</td>
-                <td><input type="text" id="isemester" name="semester" value={term.semester} onChange={onChange} /></td>
+                <td><input type="text" id="semester" name="semester" value={term.semester} onChange={onChange} /></td>
             </tr>
             </tbody>
             </table>
-            <Link to='/sections' id="isections" state={term}>Show Sections</Link>
+            <Link to='/sections' state={term}>Show Sections</Link>
         </>
     )
 };
