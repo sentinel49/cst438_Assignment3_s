@@ -34,10 +34,13 @@ const ScheduleView = (props) => {
 
     const dropCourse = async (enrollmentId) => {
         try {
+            const jwt = sessionStorage.getItem('jwt');
             const response = await fetch(`${SERVER_URL}/enrollments/${enrollmentId}`,
                 {
                     method: 'DELETE',
-                });
+                    headers: {
+                        'Authorization': jwt,
+                    }});
             if (response.ok) {
                 setMessage("course dropped");
                 fetchEnrollments();

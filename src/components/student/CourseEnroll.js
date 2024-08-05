@@ -37,11 +37,13 @@ const CourseEnroll = (props) => {
 
     const addSection = async (secNo) => {
         try {
-            const response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}?studentId=3`,
+            const jwt = sessionStorage.getItem('jwt');
+            const response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}`,
                 {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json',
+                        method: 'POST',
+                        headers: {
+                            'Authorization': jwt,
+                            'Content-Type': 'application/json',
                     }, 
                 })
             if (response.ok) {
