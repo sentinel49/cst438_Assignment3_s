@@ -15,12 +15,15 @@ const AssignmentsView = (props) => {
 
     const location = useLocation();
     const {secNo, courseId, secId} = location.state;
-
+    const jwt = sessionStorage.getItem('jwt');
 
     const fetchAssignments = async () => {
        
       try {
-        const response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`);
+          const response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`,
+              {headers: {
+                      'Authorization': jwt,
+                  }});
         if (response.ok) {
           const data = await response.json();
           setAssignments(data);
@@ -45,8 +48,9 @@ const AssignmentsView = (props) => {
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-          }, 
+              'Authorization': jwt,
+              'Content-Type': 'application/json',
+          },
           body: JSON.stringify(assignment),
         })
         .then(response => response.json() )
@@ -58,11 +62,13 @@ const AssignmentsView = (props) => {
     }
 
     const save = (assignment) => {
+        const jwt = sessionStorage.getItem('jwt');
         fetch (`${SERVER_URL}/assignments`, 
         {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json',
+              'Authorization': jwt,
+              'Content-Type': 'application/json',
           }, 
           body: JSON.stringify(assignment),
         })
@@ -82,6 +88,7 @@ const AssignmentsView = (props) => {
         {
           method: 'DELETE',
           headers: {
+            'Authorization': jwt,
             'Content-Type': 'application/json',
           }, 
         })

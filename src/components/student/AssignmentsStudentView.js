@@ -6,13 +6,13 @@ const AssignmentsStudentView = (props) => {
     const [message, setMessage] = useState('');
     const [assignments, setAssignments] = useState([]);
     const [term, setTerm ] = useState({year:'', semester:'' });
+    const jwt = sessionStorage.getItem('jwt');
 
-   // removed hardcoded studentId=3 after login security implemented
+    // removed hardcoded studentId=3 after login security implemented
 
     const fetchData = async () => {
         sessionStorage.setItem('term', JSON.stringify(term));
         try {
-            const jwt = sessionStorage.getItem('jwt');
             const response = await fetch(`${SERVER_URL}/assignments?year=${term.year}&semester=${term.semester}`,
                 {headers: {
                         'Authorization': jwt,

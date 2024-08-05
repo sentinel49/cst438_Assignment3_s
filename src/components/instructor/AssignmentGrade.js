@@ -11,6 +11,7 @@ const AssignmentGrade = (props) => {
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('');
     const [grades, setGrades] = useState([]);
+    const jwt = sessionStorage.getItem('jwt');
 
 
     const editOpen = () => {
@@ -21,7 +22,10 @@ const AssignmentGrade = (props) => {
 
     const fetchGrades = async (id) => {
         try {
-            const response = await fetch(`${SERVER_URL}/assignments/${id}/grades`);
+            const response = await fetch(`${SERVER_URL}/assignments/${id}/grades`,
+                {headers: {
+                        'Authorization': jwt,
+                    }});
             if (response.ok) {
                 const data = await response.json();
                 setGrades(data);
@@ -40,6 +44,7 @@ const AssignmentGrade = (props) => {
                 {
                 method: 'PUT',
                 headers: {
+                    'Authorization': jwt,
                     'Content-Type': 'application/json',
                 }, 
                 body: JSON.stringify(grades),
