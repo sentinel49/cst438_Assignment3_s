@@ -14,7 +14,11 @@ const CourseEnroll = (props) => {
     const fetchSections = async () => {
         // get list of open sections for enrollment
         try {
-            const response = await fetch(`${SERVER_URL}/sections/open`);
+            const jwt = sessionStorage.getItem('jwt');
+            const response = await fetch(`${SERVER_URL}/sections/open`,
+                {headers: {
+                        'Authorization': jwt,
+                    }});
             if (response.ok) {
                 const data = await response.json();
                 setSections(data);
