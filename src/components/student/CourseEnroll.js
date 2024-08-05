@@ -10,11 +10,16 @@ const CourseEnroll = (props) => {
 
     const [sections, setSections] = useState([]);
     const [message, setMessage] = useState('');
+    const jwt = sessionStorage.getItem('jwt');
+
 
     const fetchSections = async () => {
         // get list of open sections for enrollment
         try {
-            const response = await fetch(`${SERVER_URL}/sections/open`);
+            const response = await fetch(`${SERVER_URL}/sections/open`,
+                {headers: {
+                        'Authorization': jwt,
+                    }});
             if (response.ok) {
                 const data = await response.json();
                 setSections(data);
@@ -33,11 +38,12 @@ const CourseEnroll = (props) => {
 
     const addSection = async (secNo) => {
         try {
-            const response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}?studentId=3`,
+            const response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}`,
                 {
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json',
+                        method: 'POST',
+                        headers: {
+                            'Authorization': jwt,
+                            'Content-Type': 'application/json',
                     }, 
                 })
             if (response.ok) {

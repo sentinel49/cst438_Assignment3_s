@@ -5,12 +5,16 @@ const Transcript = (props) => {
 
     const [message, setMessage] = useState('');
     const [courses, setCourses] = useState([]);
+    const jwt = sessionStorage.getItem('jwt');
 
-   // removed hardcoded studentId=3 after login security implemented
+    // removed hardcoded studentId=3 after login security implemented
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/transcripts?studentId=3`);
+            const response = await fetch(`${SERVER_URL}/transcripts`,
+                {headers: {
+                        'Authorization': jwt,
+                    }});
             if (response.ok) {
                 const data = await response.json();
                 setCourses(data);

@@ -11,11 +11,15 @@ const ScheduleView = (props) => {
     const [term, setTerm] = useState( {year:'', semester:''  })
     const [enrollments, setEnrollments] = useState([]);
     const [message, setMessage] = useState('');
+    const jwt = sessionStorage.getItem('jwt');
 
-   
+
     const fetchEnrollments = async () => {
-             try {
-            const response = await fetch(`${SERVER_URL}/enrollments?studentId=3&year=${term.year}&semester=${term.semester}`);
+        try {
+            const response = await fetch(`${SERVER_URL}/enrollments?year=${term.year}&semester=${term.semester}`,
+                {headers: {
+                        'Authorization': jwt,
+                    }});
             if (response.ok) {
                 const data = await response.json();
                 setEnrollments(data);
@@ -33,7 +37,9 @@ const ScheduleView = (props) => {
             const response = await fetch(`${SERVER_URL}/enrollments/${enrollmentId}`,
                 {
                     method: 'DELETE',
-                });
+                    headers: {
+                        'Authorization': jwt,
+                    }});
             if (response.ok) {
                 setMessage("course dropped");
                 fetchEnrollments();

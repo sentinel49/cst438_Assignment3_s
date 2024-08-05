@@ -11,13 +11,17 @@ const InstructorSectionsView = (props) => {
 
     const location = useLocation();
     const {year, semester} = location.state;
+    const jwt = sessionStorage.getItem('jwt');
 
     const fetchSections = async (year, semester) => {
         if (!year || year==='' || !semester || semester==='') {
             setMessage("enter year and semester")
         }
         try {
-            const response = await fetch(`${SERVER_URL}/sections?email=dwisneski@csumb.edu&year=${year}&semester=${semester}`);
+            const response = await fetch(`${SERVER_URL}/sections?email=dwisneski@csumb.edu&year=${year}&semester=${semester}`,
+                {headers: {
+                    'Authorization': jwt,
+                    }});
             if (response.ok) {
                 const data = await response.json();
                 setSections(data);
