@@ -11,12 +11,18 @@ const EnrollmentsView = (props) => {
 
     const location = useLocation();
     const {secNo, courseId, secId} = location.state;
+    const jwt = sessionStorage.getItem('jwt');
+
 
     const fetchEnrollments = async () => {
         
         if (!secNo) return;
         try {
-            const response = await fetch(`${SERVER_URL}/sections/${secNo}/enrollments`);
+            const response = await fetch(`${SERVER_URL}/sections/${secNo}/enrollments`,
+                {
+                    headers: {
+                    'Authorization': jwt,
+                    }});
             if (response.ok) {
                 const data = await response.json();
                 setEnrollments(data);
@@ -40,6 +46,7 @@ const EnrollmentsView = (props) => {
                 {
                 method: 'PUT',
                 headers: {
+                    'Authorization': jwt,
                     'Content-Type': 'application/json',
                 }, 
                 body: JSON.stringify(enrollments),
