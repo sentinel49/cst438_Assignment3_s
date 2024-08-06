@@ -15,12 +15,17 @@ function SectionsView(props) {
 
     const [message, setMessage] = useState('');
 
+    const jwt = sessionStorage.getItem('jwt');
+
     const fetchSections = async () => {
         if (search.courseId==='' || search.year==='' || search.semester==='' ) {
             setMessage("Enter search parameters");
         } else {
           try {
-            const response = await fetch(`${SERVER_URL}/courses/${search.courseId}/sections?year=${search.year}&semester=${search.semester}`);
+            const response = await fetch(`${SERVER_URL}/courses/${search.courseId}/sections?year=${search.year}&semester=${search.semester}`,
+                {headers: {
+                    'Authorization': jwt,
+                    }});
             if (response.ok) {
               const data = await response.json();
               setSections(data);
@@ -40,6 +45,7 @@ function SectionsView(props) {
           {
             method: 'PUT',
             headers: {
+                "Authorization": jwt,
               'Content-Type': 'application/json',
             }, 
             body: JSON.stringify(section),
@@ -62,6 +68,7 @@ function SectionsView(props) {
           {
             method: 'POST',
             headers: {
+                'Authorization': jwt,
               'Content-Type': 'application/json',
             }, 
             body: JSON.stringify(section),
@@ -85,6 +92,7 @@ function SectionsView(props) {
         {
           method: 'DELETE',
           headers: {
+              'Authorization': jwt,
             'Content-Type': 'application/json',
           }, 
         });

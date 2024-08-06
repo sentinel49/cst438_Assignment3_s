@@ -43,7 +43,7 @@ const Login = (props) => {
             </tr>
             <tr>
                 <td> <label htmlFor="password">Password</label></td>
-                <td> <input type="text" name="password" value={user.password} onChange={onChange} /> </td>
+                <td> <input type="password" name="password" value={user.password} onChange={onChange} /> </td>
             </tr>
           </tbody>
         </table>
