@@ -13,9 +13,14 @@ function CoursesView(props) {
 
     const [ message, setMessage ] = useState('');
 
+    const jwt = sessionStorage.getItem('jwt');
+
     const  fetchCourses = async () => {
       try {
-        const response = await fetch(`${SERVER_URL}/courses`);
+        const response = await fetch(`${SERVER_URL}/courses`,
+            {headers: {
+                'Authorization': jwt,
+                }});
         if (response.ok) {
           const courses = await response.json();
           setCourses(courses);
@@ -38,6 +43,7 @@ function CoursesView(props) {
             {
               method: 'PUT',
               headers: {
+                  'Authorization': jwt,
                 'Content-Type': 'application/json',
               }, 
               body: JSON.stringify(course),
@@ -60,6 +66,7 @@ function CoursesView(props) {
             {
               method: 'POST',
               headers: {
+                  'Authorization': jwt,
                 'Content-Type': 'application/json',
               }, 
               body: JSON.stringify(course),
@@ -82,6 +89,7 @@ function CoursesView(props) {
             {
               method: 'DELETE',
               headers: {
+                  'Authorization': jwt,
                 'Content-Type': 'application/json',
               }, 
             });
